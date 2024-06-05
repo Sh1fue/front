@@ -1,0 +1,42 @@
+.footer {
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    gap: 20px;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border-top: 1px solid #ccc;
+}
+
+.footer-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-2 {
+    grid-column: span 2;
+}
+
+.logo div {
+    margin-bottom: 10px;
+}
+
+.company-info, .links, .contact-info, .email {
+    display: flex;
+    flex-direction: column;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.contact-info div, .email div {
+    margin-bottom: 10px;
+}
+
+@media (max-width: 600px) {
+    .logo {
+        grid-column: span 1;
+    }
+}
