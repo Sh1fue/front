@@ -18,19 +18,16 @@ function Footer() {
             <div className="sectoins-links">
             <div className="company-info">
                 <div>ИП "Лашко Б.Е."</div>
-                <div>ИНН 3525471044</div>
-                <div>КПП 352501001</div>
-                <div>ОГРН 1213500009656</div>
+                <div>ИНН 616611444035</div>
+                <div>ОГРН 308616621000048</div>
             </div>
             <div className="links links-1">
                 <Link to='/onas'><div>О нас</div></Link>
                 <Link to='/catalog'><div>Каталог</div></Link>
-                <Link to='/profile'><div>Личный кабинет</div></Link>
             </div>
             <div className="links links-2">
             <Link to='/contact'><div>Контакты</div></Link>
-            <Link to='/'><div>Политика конфиденциальности</div></Link>
-            <Link to='/'><div>Согласие на обработку персональных данных</div></Link>
+            <Link to='/privacy'><div>Политика конфиденциальности</div></Link>
             </div>
             </div>
             </div>

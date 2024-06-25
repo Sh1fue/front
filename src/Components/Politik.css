@@ -1,0 +1,14 @@
+.politik{
+    margin-left: 25%;
+    margin-top: 4%;
+    font-size: 15px;
+    padding: 20px;
+    width: 50%;
+    border-radius: 13px;
+    background-color: rgb(183, 183, 183);
+    text-align: center;
+}
+.politik p{
+    margin-bottom: 5%;
+    font-size: 20px;
+}

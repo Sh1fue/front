@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './AdminPanel.css';
 import Sidebar from './SidebarAdmin';
-
+import Footer from './Footer';
 function DetailAdmin() {
 const [name, setName] = useState('');
 const [price, setPrice] = useState('');
@@ -128,6 +128,7 @@ onChange={(e) => setImage(e.target.files[0])}
 {error && <p style={{ color: 'red' }}>{error}</p>}
 </form>
 </div>
+<Footer></Footer>
 </>
 );
 }

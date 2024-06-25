@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../modal/AuthContext';
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-
+import Footer from './Footer';
 function Catalog() {
   const { user } = useAuth();
   const userId = user ? user.user : null;
@@ -214,6 +214,7 @@ function Catalog() {
           ))}
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 }

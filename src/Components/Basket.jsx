@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../modal/AuthContext';
 import '../Components/Basket.css';
-
+import Footer from './Footer';
 const Basket = () => {
   const { isAuthenticated } = useAuth();
   const [items, setItems] = useState(() => {
@@ -92,6 +92,7 @@ const Basket = () => {
           </>
         )}
       </div>
+      <Footer></Footer>
     </>
   );
 };
