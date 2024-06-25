@@ -1,15 +1,13 @@
-
 import React from 'react';
 import './Sidebar.css';
+import { Link } from 'react-router-dom';
 
 function Sidebar() {
   return (
     <div className="sidebar-admin">
       <h2>PekDash</h2>
       <ul>
-        <li>Добавить</li>
-        <li>Удалить</li>
-        <li>Изменить</li>
+        <Link to='/admin'><li><button>Добавить</button></li></Link>
       </ul>
     </div>
   );
