@@ -8,6 +8,7 @@ function Sidebar() {
       <h2>PekDash</h2>
       <ul>
         <Link to='/admin'><li><button>Добавить</button></li></Link>
+        <Link to='/delete'><li><button>Удалить</button></li></Link>
       </ul>
     </div>
   );

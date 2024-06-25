@@ -3,6 +3,7 @@ import axios from 'axios';
 import './AdminPanel.css';
 import Sidebar from './SidebarAdmin';
 import Footer from './Footer';
+
 function DetailAdmin() {
 const [name, setName] = useState('');
 const [price, setPrice] = useState('');
