@@ -10,6 +10,21 @@
     opacity: 0;
     pointer-events: none;
     transition: 0.5s;
+    z-index: 100;
+}
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 99;
+}
+
+.modal-overlay.active {
+    display: block;
 }
 
 .modal.active {
@@ -47,4 +62,34 @@
 
 .modal__content button:hover {
     background-color: darkorange;
+}
+
+.checkbox-container {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 0.1fr 1fr;
+}
+
+.checkbox-container input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.checkbox-container label {
+    font-size: 14px;
+    display: inline-block;
+    width: calc(100% - 30px);
+}
+
+.checkbox-container label a {
+    color: blue;
+    text-decoration: none;
+}
+
+.checkbox-container label a:hover {
+    text-decoration: underline;
+}
+
+span {
+    display: flex;
+    display: inline-block;
 }

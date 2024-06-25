@@ -1,42 +1,49 @@
 .footer {
     display: grid;
-    grid-template-columns: repeat(7,1fr);
-    gap: 20px;
-    padding: 20px;
-    background-color: #f1f1f1;
-    border-top: 1px solid #ccc;
+    grid-template-columns: 2fr 1fr;
+    width: 70vw;
+    margin-left: 15%;
+    margin-top: 2%;
 }
-
-.footer-section {
-    display: flex;
-    flex-direction: column;
-}
-
 .logo-2 {
-    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 0.2fr 1fr;
+}
+.links{display: grid;
+    gap: 0.5em;
+}
+.sectoins-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 2%;
 }
 
-.logo div {
-    margin-bottom: 10px;
+.contact-info {
+    justify-self: end;
+    display: grid;
+    gap: 0.5em;
 }
-
-.company-info, .links, .contact-info, .email {
-    display: flex;
-    flex-direction: column;
+.company-info{
+    display: grid;
+    gap: 0.5em;
 }
-
-.links {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+.logo-footer b{
+    color: #3B67BB;
+    font-size: 24px;
 }
-
-.contact-info div, .email div {
-    margin-bottom: 10px;
+.logo-footer > small{
+    color: #FB9257;
+    font-size: 15px;
 }
-
-@media (max-width: 600px) {
-    .logo {
-        grid-column: span 1;
-    }
+.razdel{
+    margin-top: 5%;
+    background-color: #D9D9D9;
+    width: 70vw;
+    height: 7px;
+    margin-left: 15%;
+    border-radius: 15px;
+}
+.opisanie-footer{
+    font-weight: 550;
+    font-size: 15px;
 }

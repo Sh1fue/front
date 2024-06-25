@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import './ModalAuth.css';
 
-const ModalAuth = ({ activeAuth, setActiveAuth, onLogin }) => { 
+const ModalAuth = ({ activeAuth, setActiveAuth, onLogin }) => {
     const [formData, setFormData] = useState({
         email: "",
         password: ""
@@ -17,12 +19,32 @@ const ModalAuth = ({ activeAuth, setActiveAuth, onLogin }) => {
 
     const handleSubmit = async () => {
         try {
-            const response = await axios.post('https://8ba5-94-141-124-60.ngrok-free.app/api/user/login', formData);
-            console.log(response.data); 
-            onLogin();
+            const response = await axios.post('https://781c-94-141-125-64.ngrok-free.app/api/user/login', formData);
+            console.log("Response data:", response.data);
+            onLogin(response.data);
             setActiveAuth(false);
+            toast.success("Успешная авторизация!");
         } catch (error) {
-            console.error("Ошибка при отправке запроса:", error);
+            if (axios.isAxiosError(error)) {
+                console.error("Ошибка при отправке запроса:", error.message);
+                if (error.response) {
+                    console.error("Data:", error.response.data);
+                    console.error("Status:", error.response.status);
+                    console.error("Headers:", error.response.headers);
+                    if (error.response.status === 401) {
+                        toast.error("Неверный email или пароль.");
+                    } else {
+                        toast.error(`Ошибка сервера: ${error.response.status} - ${error.response.data}`);
+                    }
+                } else if (error.request) {
+                    toast.error("Ошибка запроса: нет ответа от сервера");
+                } else {
+                    toast.error(`Ошибка: ${error.message}`);
+                }
+            } else {
+                console.error("Unexpected error:", error);
+                toast.error("Произошла непредвиденная ошибка");
+            }
         }
     };
 
@@ -34,7 +56,7 @@ const ModalAuth = ({ activeAuth, setActiveAuth, onLogin }) => {
                     name="email" 
                     value={formData.email} 
                     onChange={handleChange} 
-                    placeholder="Электронная почта" 
+                    placeholder="Электронная почта"     
                 />
                 <input 
                     type="password" 
@@ -45,6 +67,7 @@ const ModalAuth = ({ activeAuth, setActiveAuth, onLogin }) => {
                 />
                 <button onClick={handleSubmit}>Войти</button>
             </div>
+            <ToastContainer />
         </div>
     );
 };

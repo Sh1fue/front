@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import '../Components/Catalog.css';
 import axios from 'axios';
-import Header from '../Components/Header';
 import { useLocation } from 'react-router-dom';
 
 function Catalog() {
-  const [filteredData, setFilteredData] = useState(null);
+  const [filteredData, setFilteredData] = useState([]);
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(5000);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedCategories, setSelectedCategories] = useState({
-    1: false, // Шины
-    2: false, // Тех запчасти
-    3: false, // Масла
-    4: false, // Инструменты
-    5: false, // АвтоХимия
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+    5: false,
   });
 
   const location = useLocation();
@@ -38,19 +37,20 @@ function Catalog() {
     });
   };
 
-  const filterByPriceAndCategory = () => {
-    if (!data) return;
+  const filterByPriceAndCategory = (searchQuery = '') => {
+    if (!Array.isArray(data)) return;
 
-    let filtered;
+    let filtered = data.filter((item) => item.price >= minValue && item.price <= maxValue);
+    
     const selectedCategoryValues = Object.values(selectedCategories);
-    if (selectedCategoryValues.every((value) => !value)) {
-      filtered = data;
-    } else {
-      filtered = data.filter((item) => {
-        const passesPriceFilter = item.price >= minValue && item.price <= maxValue;
-        const passesCategoryFilter = selectedCategories[item.info_id];
-        return passesPriceFilter && passesCategoryFilter;
-      });
+    if (selectedCategoryValues.some((value) => value)) {
+      filtered = filtered.filter((item) => selectedCategories[item.info_id]);
+    }
+    if (searchQuery) {
+      filtered = filtered.filter((item) =>
+        item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.articul.toLowerCase().includes(searchQuery.toLowerCase())
+      );
     }
 
     setFilteredData(filtered);
@@ -59,13 +59,17 @@ function Catalog() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://8ba5-94-141-124-60.ngrok-free.app/api/detail/all', {
+        const response = await axios.get('https://781c-94-141-125-64.ngrok-free.app/api/detail/all', {
           headers: {
             'ngrok-skip-browser-warning': 'true',
           },
         });
-        setData(response.data); 
-        setFilteredData(response.data);
+        if (Array.isArray(response.data)) {
+          setData(response.data);
+          setFilteredData(response.data);
+        } else {
+          throw new Error('Data is not an array');
+        }
       } catch (error) {
         setError(error);
       } finally {
@@ -79,36 +83,27 @@ function Catalog() {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const infoId = params.get('info_id');
+    const searchQuery = params.get('search');
     if (infoId) {
       setSelectedCategories((prevCategories) => ({
         ...prevCategories,
         [infoId]: true,
       }));
     }
+    filterByPriceAndCategory(searchQuery);
   }, [location.search]);
 
   useEffect(() => {
-    filterByPriceAndCategory();
+    const params = new URLSearchParams(location.search);
+    const searchQuery = params.get('search');
+    filterByPriceAndCategory(searchQuery);
   }, [minValue, maxValue, data, selectedCategories]);
-
-  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <>
-      <Header />
       <div className='glivn'>
-        <div className="container-catalog">
-          <nav>
-            <ul>
-              <li>Популярные товары</li>
-              <li>АвтоХимия</li>
-              <li>Шины</li>
-              <li>Аксессуары и инструменты</li>
-            </ul>
-          </nav>
-        </div>
         <div className="container-common">
-          <div className="sidebar">
+          <div className="sidebarr">
             <div className="filter-section">
               <h4>Price Range</h4>
               <div className="range-container">
@@ -129,14 +124,14 @@ function Catalog() {
                   min="0"
                   max="10000"
                 />
-                <div className="slider-container">
+                <div className="slider-container-ct">
                   <input
                     type="range"
                     min="0"
                     max="10000"
                     value={minValue}
                     onChange={handleMinChange}
-                    className="slider"
+                    className="slider-ct"
                   />
                   <input
                     type="range"
@@ -144,7 +139,7 @@ function Catalog() {
                     max="10000"
                     value={maxValue}
                     onChange={handleMaxChange}
-                    className="slider"
+                    className="slider-ct"
                   />
                 </div>
               </div>
@@ -178,7 +173,7 @@ function Catalog() {
                 <h2>{item.name}</h2>
                 <div className="info">
                   <p className="price">Price: {item.price}</p>
-                  <button className="buy-button">Купить</button>
+                  <button className="buy-button" onClick={() => handleBuyClick(item.detail_id)}>Купить</button>
                 </div>
               </div>
             ))}
