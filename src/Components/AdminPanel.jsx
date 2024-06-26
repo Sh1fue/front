@@ -51,7 +51,7 @@ articul: articul,
 description: description
 };
 
-const response = await axios.post('https://781c-94-141-125-64.ngrok-free.app/api/detail/create', dataToSend);
+const response = await axios.post('https://8150-94-141-125-64.ngrok-free.app/api/detail/create', dataToSend);
 
 console.log('Response:', response.data);
 } catch (error) {

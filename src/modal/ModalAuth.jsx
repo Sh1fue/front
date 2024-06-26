@@ -21,9 +21,9 @@ const ModalAuth = ({ activeAuth, setActiveAuth }) => {
 
     const handleSubmit = async () => {
         try {
-            const response = await axios.post('https://781c-94-141-125-64.ngrok-free.app/api/user/login', formData);
-            console.log("Login response data:", response.data); // Log all data from backend
-            login(response.data); // Call login function with user data
+            const response = await axios.post('https://8150-94-141-125-64.ngrok-free.app/api/user/login', formData);
+            console.log("Login response data:", response.data); 
+            login(response.data); 
             setActiveAuth(false);
             toast.success("Успешная авторизация!");
         } catch (error) {

@@ -15,7 +15,7 @@ setFormData({ ...formData, [e.target.name]: e.target.value });
 const handleSubmit = async (e) => {
 e.preventDefault();
 try {
-const response = await fetch('http://localhost:5000/send', {
+const response = await fetch('https://8150-94-141-125-64.ngrok-free.app/send', {
 method: 'POST',
 headers: {
 'Content-Type': 'application/json'

@@ -56,7 +56,7 @@ const Modal = ({ active, setActive }) => {
         }
 
         try {
-            const response = await axios.post('https://781c-94-141-125-64.ngrok-free.app/api/user/registration', formData);
+            const response = await axios.post('https://8150-94-141-125-64.ngrok-free.app/api/user/registration', formData);
             setActive(false);
             toast.success("Регистрация прошла успешно!");
         } catch (error) {
